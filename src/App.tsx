@@ -3,7 +3,8 @@
 //import Footer from './components/footer/Footer'
 import './App.css';
 import Home from './paginas/home/Home';
-import Footer from './componets/footer/Footer.css';
+import Footer from './componets/footer/Footer';
+import Navbar from './componets/navbar/Navbar';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <p>Conteúdo da minha aplicação</p>
     <Home />
     <Footer />
+    <Navbar />
   </div>
    
   )
