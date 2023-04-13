@@ -8,13 +8,11 @@ import Navbar from './componets/navbar/Navbar';
 
 function App() {
   return (
-    <div>
-    <h1>Minha aplicação</h1>
-    <p>Conteúdo da minha aplicação</p>
-    <Home />
-    <Footer />
-    <Navbar />
-  </div>
+    <>
+      <Home />
+      <Footer />
+      <Navbar />
+  </>
    
   )
 }
