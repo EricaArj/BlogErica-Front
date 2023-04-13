@@ -13,12 +13,12 @@ function Footer() {
             justifyContent="center" 
             alignItems="center">
                 <Grid alignItems="center" item xs={12}>
-                    <Box style={{ backgroundColor: "var(--green)", height: "120px" }}>
+                    <Box style={{ backgroundColor: "var(--lavanda-400)", height: "120px" }}>
                         <Box paddingTop={1} 
                         display="flex" 
                         alignItems="center" 
                         justifyContent="center">
-                            <Typography variant="h5" align="center" gutterBottom style={{ color: "white" }}>Siga-nos nas redes sociais </Typography>
+                            <Typography variant="h5" align="center" gutterBottom style={{ color: "white" }}>redes sociais </Typography>
                         </Box>
                         <Box display="flex" 
                         alignItems="center" 
@@ -36,7 +36,7 @@ function Footer() {
                     </Box>
                     <Box style={{ backgroundColor: "#754999", height: "60px" }}>
                         <Box paddingTop={1}>
-                            <Typography variant="subtitle2" align="center" gutterBottom style={{ color: "white" }} >© 2020 Copyright:</Typography>
+                            <Typography variant="subtitle2" align="center" gutterBottom style={{ color: "white" }} >© 2023:</Typography>
                         </Box>
                         <Box>
                             <a target="_blank" href="https://brasil.generation.org" rel="noopener noreferrer">
