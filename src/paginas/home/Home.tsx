@@ -6,48 +6,75 @@ import './Home.css'
 function Home() {
   return (
     <>
+    
       <Grid
+      
         container direction="row" justifyContent="center" alignItems="center"
-        style={{ backgroundColor: 'var(--black-p-600)' }}
+        style={{ backgroundColor: 'var(--ameixa-200)' }}
       >
+       
         <Grid alignItems="center" item xs={6}>
-          <Box paddingX={20}  >
-            <Typography
-              variant="h3" gutterBottom color="textPrimary" component="p" align="center"
-              style={{ color: 'white', fontWeight: 'bold' }}
-            >
-              Seja bem vindo(a)!
-            </Typography>
-            <Typography
-              variant="h5" gutterBottom  color="textPrimary" component="h5" align="center"
-              style={{ color: 'white', fontWeight: 'bold' }}
-            >
-              Deixe o seu comentario!
-            </Typography>
-          </Box>
+        <div className="wrapper" style={{ display: 'flex', justifyContent: 'center' }}>
+            <Box paddingX={20}  >
+              <Typography
+                  variant="h3"
+                  gutterBottom
+                  color="textPrimary"
+                  component="p"
+                  align="center"
+                  style={{ 
+                    color: 'black', 
+                    fontWeight: 'bold', 
+                    fontSize: '6vw',  // Utilizando a unidade "vw"
+                    whiteSpace: 'nowrap' 
+               }}
+             >
+               Seja bem vindo(a)!
+              </Typography>
+              <Typography
+                variant="h5"
+                gutterBottom
+                color="textPrimary"
+                component="h5"
+                align="center"
+                style={{ 
+                  color: 'black', 
+                  fontWeight: 'bold', 
+                  fontSize: '3vw',  // Utilizando a unidade "vw"
+                  whiteSpace: 'nowrap' 
+             }}
+           >
+                Deixe o seu Comentario!
+              </Typography>
+            </Box>
+          </div>
           <Box display="flex" justifyContent="center">
-            <Box marginRight={1}></Box>
-            <Button
-              variant="outlined"
-              style={{
-                borderColor: 'white',
-                backgroundColor: 'var(--black-p-600)',
-                color: 'white',
-              }}
-            >
-              Postagens
-            </Button>
-          </Box>
+                    <Button className='HomeButton'
+                      variant="outlined"
+                      style={{
+                        borderColor: 'var(--ameixa-200)',
+                        backgroundColor: 'var(--lavanda-400)',
+                        color: 'var(--ameixa-200)',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Ver Postagens
+                    </Button>
+              </Box>
         </Grid>
-        <Grid item xs={6}>
-          <img
-            src="https://i.imgur.com/Hu7ZYb6.png"
-            alt=""
-            className='foto'
-          />
+        
+       <Grid container>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+            <Grid item xs={6}>
+              <img src="https://i.imgur.com/hhuyFuC.png" alt="imagem de uma menina coelho" className='foto' />
+            </Grid>
+          </div>
         </Grid>
-        <Grid xs={12} style={{ backgroundColor: 'white' }}></Grid>
-      </Grid>
+
+
+        <Box sx={{ backgroundColor: 'transparent', backgroundImage: 'url()', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+      </Box>
+    </Grid>
     </>
   );
 }

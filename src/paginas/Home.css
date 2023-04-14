@@ -1,8 +1,0 @@
-/* CSS */
-
-.foto {
-  width: max(350px, 65%);
-  margin: 0 auto;
-  display: block;
-  transform: rotateY(180deg);
-}
