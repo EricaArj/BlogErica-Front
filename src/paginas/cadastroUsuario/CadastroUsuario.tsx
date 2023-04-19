@@ -139,17 +139,24 @@ function CadastroUsuario() {
               }
             />
 
-            <Box marginTop={2} textAlign="center">
-              <Link to="/login" className="text-decorator-none">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className="buttonCancelar"
-                >
-                  Cancelar
-                </Button>
-              </Link>
-              <Button type="submit" variant="contained" color="primary">
+            <Box
+              marginY={2}
+              display={"flex"}
+              justifyContent={"space-around"}
+              gap={4}
+            >
+              <Button
+                
+                size="large"
+                variant="contained"
+                color="error"
+                fullWidth
+              >
+                {/* <Link to='/login'> */}
+                Cancelar
+                {/* </Link> */}
+              </Button>
+              <Button type="submit" size="large" variant="contained" fullWidth>
                 Cadastrar
               </Button>
             </Box>

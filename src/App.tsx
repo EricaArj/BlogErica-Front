@@ -8,6 +8,8 @@ import MediaControlCar from './paginas/midias/Midia'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Midia from './paginas/midias/Midia';
 import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario';
+import ListaTemas from './components/temas/ListaTemas'
+import ListaPostagens from './components/postagens/listaPostagens/ListaPostagens'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/cadastrousuario" element={<CadastroUsuario />} />
+          <Route path='/temas' element={<ListaTemas />} />
+          <Route path='/postagens' element={<ListaPostagens />} />
         </Routes>
       </div>
       <Midia />
