@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Midia from "./paginas/midias/Midia";
 import CadastroUsuario from "./paginas/cadastroUsuario/CadastroUsuario";
 import ListaTemas from "./components/temas/listaTemas/ListaTemas";
-import ListaPostagens from "./components/postagem/listaPostagem/ListaPostagens";
+import ListaPostagens from "./components/postagem/listaPostagem/ListaPostagem";
 
 function App() {
   return (
