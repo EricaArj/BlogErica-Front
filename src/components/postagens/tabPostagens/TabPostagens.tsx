@@ -13,7 +13,7 @@ function TabPostagens() {
     setValue(newValue);
   };
 
-  // TabIndicatorProps={{style: {display: 'none'}}}
+  
   return (
     <TabContext value={value}>
         <AppBar position="static" className='barrinha' style={{color: '#fcfcfc'}}>
@@ -26,7 +26,7 @@ function TabPostagens() {
           <ListaPostagens />
         </TabPanel>
         <TabPanel value="2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus similique nulla neque deserunt sed repudiandae ea accusantium, dicta nihil nisi nostrum ratione quod incidunt aspernatur delectus temporibus, sit, expedita recusandae.
+          nulla nequicta nihil nisi nostrum ratione quod incandae.
         </TabPanel>
       </TabContext>
   )

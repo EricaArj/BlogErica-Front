@@ -4,166 +4,181 @@ import "./CadastroUsuario.css";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import User from "../../models/User";
-import { cadastroUsuario } from "../../services/service";
+import { cadastrarUsuario } from "../../services/service";
 
 function CadastroUsuario() {
-  let navigate = useNavigate();
+  const history = useNavigate();
+
+  const [usuario, setUsuario] = useState<User>({
+    id: 0,
+    nome: "",
+    usuario: "",
+    foto: "",
+    senha: "",
+  });
+
+  const [usuarioResult, setUsuarioResult] = useState<User>({
+    id: 0,
+    nome: "",
+    usuario: "",
+    foto: "",
+    senha: "",
+  });
+
   const [confirmarSenha, setConfirmarSenha] = useState<String>("");
 
-  const [user, setUser] = useState<User>({
-    id: 0,
-    nome: "",
-    usuario: "",
-    senha: "",
-    foto: "",
-  });
+  function confirmarSenhaHandle(event: ChangeEvent<HTMLInputElement>) {
+    setConfirmarSenha(event.target.value);
+  }
 
-  const [userResult, setUserResult] = useState<User>({
-    id: 0,
-    nome: "",
-    usuario: "",
-    senha: "",
-    foto: "",
-  });
-
-  function updatedModel(evento: ChangeEvent<HTMLInputElement>) {
-    setUser({
-      ...user,
-      [evento.target.name]: evento.target.value,
+  function updateModel(event: ChangeEvent<HTMLInputElement>) {
+    setUsuario({
+      ...usuario,
+      [event.target.name]: event.target.value,
     });
   }
 
-  function confirmarSenhaHandle(evento: ChangeEvent<HTMLInputElement>) {
-    setConfirmarSenha(evento.target.value);
+  async function onSubmit(event: ChangeEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (confirmarSenha === usuario.senha && usuario.senha.length > 8) {
+      try {
+        await cadastrarUsuario("/usuarios/cadastrar", usuario, setUsuarioResult);
+        alert("Usuário cadastrado com sucesso");
+      } catch (error) {
+        alert("Por favor, verifique os campos");
+      }
+    } else {
+      alert("As senhas não coincidem");
+      setConfirmarSenha("");
+      setUsuario({
+        ...usuario,
+        senha: "",
+      });
+    }
   }
 
   useEffect(() => {
-    if (userResult.id != 0) {
-      navigate("/login");
-    }
-  }, [userResult]);
+    console.log("rodou");
+  }, [usuario.nome]);
 
-  async function onSubmit(evento: ChangeEvent<HTMLFormElement>) {
-    evento.preventDefault();
-    if (confirmarSenha == user.senha) {
-      cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult);
-      alert("Usuario cadastrado com sucesso");
-    } else {
-      alert(
-        "Dados inconsistentes. Favor verificar as informações de cadastro."
-      );
+  useEffect(() => {
+    if (usuarioResult.id !== 0) {
+      history("/login");
     }
+  }, [usuarioResult]);
+
+  function back() {
+    history("/login");
   }
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid item xs={6} className="imag"></Grid>
-      <Grid item xs={6} alignItems="center">
-        <Box paddingX={10}>
-          <form onSubmit={onSubmit}>
-            <Typography
-              variant="h3"
-              gutterBottom
-              color="textPrimary"
-              component="h3"
-              align="center"
-              className="text"
-            >
-              Cadastrar
-            </Typography>
-
-            <TextField
-              id="nome"
-              label="nome"
-              variant="outlined"
-              name="nome"
-              margin="normal"
-              fullWidth
-              value={user.nome}
-              onChange={(evento: ChangeEvent<HTMLInputElement>) =>
-                updatedModel(evento)
-              }
-            />
-
-            <TextField
-              id="usuario"
-              label="usuario"
-              variant="outlined"
-              name="usuario"
-              margin="normal"
-              fullWidth
-              value={user.usuario}
-              onChange={(evento: ChangeEvent<HTMLInputElement>) =>
-                updatedModel(evento)
-              }
-            />
-
-            <TextField
-              id="senha"
-              label="senha"
-              variant="outlined"
-              name="senha"
-              margin="normal"
-              type="password"
-              fullWidth
-              value={user.senha}
-              onChange={(evento: ChangeEvent<HTMLInputElement>) =>
-                updatedModel(evento)
-              }
-            />
-
-            <TextField
-              id="confirmarSenha"
-              label="confirmarSenha"
-              variant="outlined"
-              name="confirmarSenha"
-              margin="normal"
-              type="password"
-              fullWidth
-              value={confirmarSenha}
-              onChange={(evento: ChangeEvent<HTMLInputElement>) =>
-                confirmarSenhaHandle(evento)
-              }
-            />
-
-            <TextField
-              id="foto"
-              label="foto"
-              variant="outlined"
-              name="foto"
-              margin="normal"
-              fullWidth
-              value={user.foto}
-              onChange={(evento: ChangeEvent<HTMLInputElement>) =>
-                updatedModel(evento)
-              }
-            />
-
-            <Box
-              marginY={2}
-              display={"flex"}
-              justifyContent={"space-around"}
-              gap={4}
-            >
-              <Button
-                
-                size="large"
-                variant="contained"
-                color="error"
-                fullWidth
-              >
-                {/* <Link to='/login'> */}
-                Cancelar
-                {/* </Link> */}
-              </Button>
-              <Button type="submit" size="large" variant="contained" fullWidth>
-                Cadastrar
-              </Button>
-            </Box>
-          </form>
-        </Box>
+    <>
+      <Grid container alignItems={"center"}>
+        <Grid item xs={6} className="imag"></Grid>
+        <Grid item xs={6} justifyContent="center">
+          <Box display="flex" justifyContent={"center"}>
+            <Grid item xs={8}>
+              <form onSubmit={onSubmit}>
+                <Typography
+                  variant="h3"
+                  align="center"
+                  gutterBottom
+                  fontWeight="bold"
+                >
+                  Cadastrar
+                </Typography>
+                <TextField
+                  variant="outlined"
+                  name="nome"
+                  value={usuario.nome}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    updateModel(event)
+                  }
+                  label="Nome completo"
+                  margin="normal"
+                  required
+                  fullWidth
+                />
+                <TextField
+                  variant="outlined"
+                  name="usuario"
+                  value={usuario.usuario}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    updateModel(event)
+                  }
+                  label="Usuário (endereço de e-mail)"
+                  margin="normal"
+                  required
+                  type="email"
+                  fullWidth
+                />
+                <TextField
+                  variant="outlined"
+                  name="foto"
+                  value={usuario.foto}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    updateModel(event)
+                  }
+                  label="Foto (URL)"
+                  margin="normal"
+                  fullWidth
+                />
+                <TextField
+                  type="password"
+                  name="senha"
+                  value={usuario.senha}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    updateModel(event)
+                  }
+                  variant="outlined"
+                  label="Senha"
+                  margin="normal"
+                  fullWidth
+                />
+                <TextField
+                  type="password"
+                  name="confirmarSenha"
+                  value={confirmarSenha}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    confirmarSenhaHandle(event)
+                  }
+                  variant="outlined"
+                  label="Confirmar Senha"
+                  margin="normal"
+                  fullWidth
+                />
+                <Box
+                  marginY={2}
+                  display={"flex"}
+                  justifyContent={"space-around"}
+                  gap={4}
+                >
+                  <Button
+                    onClick={back}
+                    size="large"
+                    variant="contained"
+                    color="error"
+                    fullWidth
+                  >
+                    {/* <Link to='/login'> */}
+                    Cancelar
+                    {/* </Link> */}
+                  </Button>
+                  <Button
+                    type="submit"
+                    size="large"
+                    variant="contained"
+                    fullWidth
+                  >
+                    Cadastrar
+                  </Button>
+                </Box>
+              </form>
+            </Grid>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
 

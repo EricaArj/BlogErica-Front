@@ -35,7 +35,7 @@ function Login() {
     function updatedModel(evento: ChangeEvent<HTMLInputElement>) {
         setUserLogin({
             ...userLogin,
-            //[Capturando a propriedade] : Capturando o valor da propriedad
+            //Capturando a propriedade
             [evento.target.name]: evento.target.value
         })
     }
