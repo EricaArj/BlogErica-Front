@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
 :root {
-  --ameixa-200:       #fff8f8;
-  --lavanda-400:      #e789d0;
-  --black-p-600:      #b14c7b;
-  --cinza-900:        #3a2b3a;
+  --branco-100: #ffffff;
+  --p-100: #fc89ec;
+  --v-200: #ffa8ec;
+  --v-400: #57bcb4;
+  --v-600: #c54aa6;
+  --v-900: #c54aa6;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  font-family: 'Ubuntu', sans-serif !important;
 }
+

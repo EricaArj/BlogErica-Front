@@ -1,13 +1,9 @@
-import Tema from "./Tema";
+import { Tema } from "./Tema";
 
-interface Postagem {
+export interface Postagem {
   id: number;
   titulo: string;
   texto: string;
   data: string;
-  
   tema?: Tema | null
-
 }
-
-export default Postagem;

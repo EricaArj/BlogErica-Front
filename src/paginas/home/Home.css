@@ -1,29 +1,6 @@
-/* CSS */
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
+.fotoHome {
+  width: max(350px, 65%);
+  margin: 0 auto;
+  display: block;
+  transform: rotateY(180deg);
 }
-
-.foto {
-  
-  max-width: 360px 65%;
-  font-size: 50%;
-  max-height:0  auto;
-  margin: 80%;
-  flex-basis: 50%;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 45vh; /* Define a altura total da tela */
-}
-
-@media screen and (max-width: 600px) {
-  .foto {
-    flex-basis: 100%;
-  }
-}
-

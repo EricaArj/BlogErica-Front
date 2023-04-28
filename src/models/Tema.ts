@@ -1,4 +1,4 @@
 export interface Tema {
-    id: number;
-    descricao: string
-  }
+  id: number;
+  descricao: string
+}

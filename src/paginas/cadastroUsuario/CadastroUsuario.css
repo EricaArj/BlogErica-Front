@@ -1,16 +1,6 @@
-.imag{
-  background-image: url("https://i.imgur.com/WUcLGad.gif");
-  background-repeat: no-repeat;
-  width: 100vh;
+.imagemCadastro {
+  background-image: url('https://i.imgur.com/WUcLGad.gif');
   min-height: 100vh;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-}
-
-.text {
-  font-weight: bold !important;
-}
-
-.buttonCancelar {
-  margin-right: 20px !important;
 }
