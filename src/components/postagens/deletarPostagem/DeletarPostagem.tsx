@@ -1,75 +1,110 @@
-import { Grid, Typography, Button, Card, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-import { Tema } from '../../../models/Tema';
-import { deleteId, getId } from '../../../service/Service';
+import {Typography, Button, Card, CardActions, CardContent } from "@material-ui/core"
+import {Box} from '@mui/material';
+import './DeletarPostagem.css';
 import { Postagem } from '../../../models/Postagem';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getId, deleteId } from '../../../service/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function DeletarPostagem() {
+
   const history = useNavigate();
   const token = useSelector<TokenState, TokenState["token"]>(
     (state) => state.token
-  )
-  const {id} = useParams<{id: string}>()
-
-  const [postagem, setPostagem] = useState<Postagem>()
-
-  useEffect(() => {
-    if (token === '') {
-      alert('Sem token não né meu bom');
-      history('/login');
-    } 
-  }, []);
-
-  async function getPostagemById(id: string) {
-    await getId(`/postagens/${id}`, setPostagem, {
-      headers: {
-        Authorization: token
-      }
-    })
-  }
-
-  useEffect(() => {
-    if (id !== undefined){
-      getPostagemById(id)
+  );
+  
+    const {id} = useParams<{id: string}>()
+  
+    const [post, setPosts] = useState<Postagem>();
+  
+    async function getPostById(id: string) {
+      await getId(`/postagens/${id}`, setPosts, {
+        headers: {
+          Authorization: token
+        }
+      })
     }
-  })
 
-  function deletarPostagem() {
-    deleteId(`/postagens/${id}`, {
-      headers: {
-        Authorization: token
+    useEffect(() => {
+      if (id !== undefined){
+        getPostById(id)
       }
     })
-    alert('Postagem deletada com sucesso, eu acho')
-    history('/postagens')
-  }
+  
+    useEffect(() => {
+      if (token === '') {
+        toast.error('Você precisa estar logado.', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined,
+        });
+        history('/login');
+      } 
+    }, [token]);
 
-  function voltar(){
-    history('/postagens')
-  }
-
+    function sim() {
+      deleteId(`/postagem/${id}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      toast.success('Postagem deletada com sucesso.', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+      });
+      history('/postagem')
+    }
+  
+    function nao(){
+      history('/posts')
+    }
+   
   return (
     <>
-      <Grid container justifyContent={'center'} mt={4}>
-        <Grid item xs={4}>
-         <Card variant='outlined'>
-         <Typography variant='h3' gutterBottom align='center'>Deletar Postagem</Typography>
-          <Typography variant='body1' gutterBottom align='center'>Você tem certeza de que deseja deletar a postagem com título: <br /> <strong>{postagem?.titulo}</strong> </Typography>
+      <Box m={2}>
+        <Card variant="outlined" >
+          <CardContent>
+            <Box justifyContent="center">
+              <Typography color="textSecondary" gutterBottom>
+                Deseja deletar a Postagem:
+              </Typography>
+              <Typography color="textSecondary" >
+              {post?.titulo}
+              </Typography>
+            </Box>
 
-          <Box display='flex'>
-            <Button variant='contained' color='primary' onClick={voltar} fullWidth>Não</Button>
-            <Button variant='contained' color='error' onClick={deletarPostagem} fullWidth >Sim</Button>
-          </Box>
-         </Card>
-
-        </Grid>
-      </Grid>
+          </CardContent>
+          <CardActions>
+            <Box display="flex" justifyContent="start" ml={1.0} mb={2} >
+              <Box mx={2}>
+              <Button onClick={sim} variant="contained" className="marginLeft" size='large' color="primary">
+                Sim
+              </Button>
+              </Box>
+              <Box>
+              <Button onClick={nao} variant="contained" size='large' color="secondary">
+                Não
+              </Button>
+              </Box>
+            </Box>
+          </CardActions>
+        </Card>
+      </Box>
     </>
-  )
+  );
 }
-
-export default DeletarPostagem
+export default DeletarPostagem;
